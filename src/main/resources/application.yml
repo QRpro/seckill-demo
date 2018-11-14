@@ -1,0 +1,19 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  datasource:
+    url: jdbc:mysql:///seckill
+    data-username: root
+    data-password:
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: skill-demo
+  redis:
+    host: localhost
+    password:
+
