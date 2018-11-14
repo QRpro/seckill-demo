@@ -4,6 +4,8 @@ import info.neilqin.anno.JsonParam;
 import info.neilqin.common.enums.ResultEnum;
 import info.neilqin.common.views.JSONView;
 import info.neilqin.exceptions.ValidatorException;
+import info.neilqin.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DemoController {
 
+    @Autowired
+    UserRepository userRepository;
     @RequestMapping("/t1")
     public JSONView<String> hello(@JsonParam("name")String name){
         System.out.println(name);
@@ -34,6 +38,10 @@ public class DemoController {
     @RequestMapping("/t5")
     public JSONView<String> hello5(@JsonParam(defaultValue = "张三") String name,String age){
         return JSONView.parseSuccess(name);
+    }
+    @RequestMapping("/t6")
+    public JSONView<String> hello6(Long phone){
+        return JSONView.parseSuccess(this.userRepository.findOne(phone));
     }
 
 }
