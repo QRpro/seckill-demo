@@ -1,8 +1,8 @@
 package info.neilqin.config;
 
 import info.neilqin.interceptors.CheckLogin;
-import info.neilqin.resovler.JsonParamResovler;
-import info.neilqin.resovler.ValidatorResovler;
+import info.neilqin.resolver.JsonParamResolver;
+import info.neilqin.resolver.ValidatorResolver;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,15 +18,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Autowired
-    JsonParamResovler jsonParamResovler;
+    JsonParamResolver jsonParamResolver;
     @Autowired
-    ValidatorResovler validatorResovler;
+    ValidatorResolver validatorResolver;
 
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(validatorResovler);
-        argumentResolvers.add(jsonParamResovler);
+        argumentResolvers.add(validatorResolver);
+        argumentResolvers.add(jsonParamResolver);
         super.addArgumentResolvers(argumentResolvers);
     }
 

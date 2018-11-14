@@ -1,4 +1,4 @@
-package info.neilqin.resovler;
+package info.neilqin.resolver;
 
 import com.alibaba.fastjson.JSONObject;
 import info.neilqin.anno.JsonParam;
@@ -20,7 +20,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * @date 2018/11/14 15:41
  */
 @Component
-public class JsonParamResovler implements HandlerMethodArgumentResolver {
+public class JsonParamResolver implements HandlerMethodArgumentResolver {
 
 
     @Override

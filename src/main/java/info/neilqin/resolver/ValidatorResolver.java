@@ -1,4 +1,4 @@
-package info.neilqin.resovler;
+package info.neilqin.resolver;
 
 import com.alibaba.fastjson.JSONObject;
 import info.neilqin.anno.Validator;
@@ -16,7 +16,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * @date 2018/11/14 17:12
  */
 @Component
-public class ValidatorResovler implements HandlerMethodArgumentResolver {
+public class ValidatorResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
