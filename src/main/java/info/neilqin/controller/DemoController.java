@@ -3,6 +3,7 @@ package info.neilqin.controller;
 import info.neilqin.anno.JsonParam;
 import info.neilqin.common.enums.ResultEnum;
 import info.neilqin.common.views.JSONView;
+import info.neilqin.entity.po.UserPO;
 import info.neilqin.exceptions.ValidatorException;
 import info.neilqin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class DemoController {
         return JSONView.parseSuccess(name);
     }
     @RequestMapping("/t6")
-    public JSONView<String> hello6(Long phone){
+    public JSONView<UserPO> hello6(Long phone){
         return JSONView.parseSuccess(this.userRepository.findOne(phone));
     }
 

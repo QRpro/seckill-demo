@@ -43,7 +43,7 @@ public class JSONView<T> implements View {
         return parseError(emun.getCode(),emun.getMessage());
     }
 
-    public static<T> JSONView parseSuccess(T obj){
+    public static<T> JSONView<T> parseSuccess(T obj){
         return new JSONView(ResultEnum.SUCCESS.getCode(),ResultEnum.SUCCESS.getMessage(),obj);
     }
 

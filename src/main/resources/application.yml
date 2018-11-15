@@ -2,15 +2,17 @@ spring:
   thymeleaf:
     prefix: classpath:/templates
     suffix: .html
-    mode: LEGACYHTML5
+    mode: HTML
     encoding: UTF-8
     content-type: text/html
     cache: false
+  resources:
+    static-locations: ["/static/"]
   datasource:
-    url: jdbc:mysql:///seckill
-    data-username: root
-    data-password:
+    url: jdbc:mysql:///seckill?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password:
   application:
     name: skill-demo
   redis:

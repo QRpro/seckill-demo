@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/list.css}">
+    <script src="http://libs.baidu.com/jquery/3.1.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <!--<script type="text/javascript" src="http://wow.techbrood.com/libs/jquery/jquery-2.1.1.min.js"></script>-->
+    <div class="playground">
+        <div class="card-placeholder tpl-placeholder">
+        </div>
+        <!-- cards to sort -->
+        <div class="card" draggable="true" onclick="getInfo()">
+            <img width="250" height="150" src="https://source.unsplash.com/random/250x150" draggable="false" />
+            <div class="card-text">
+                <h3>Some Title</h3>
+                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.asdfasdfasdfasdfasdfasdfasdf..</span>
+            </div>
+            <div style="line-height: 150px;width: 10%">5件</div>
+            <div class="ribbon">
+                <div class="wrap" style="display: flex">
+                    <div class="price old_price">$0.09</div>
+                    <div class="price">$0.09</div>
+                    <span class="ribbon6">秒杀</span>
+                </div>
+            </div>
+        </div>
+        <div class="card" draggable="true">
+            <img width="250" height="150" src="https://source.unsplash.com/category/buildings/250x150" draggable="false" />
+            <div class="card-text">
+                <h3>Some Title</h3>
+                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
+            </div>
+            <div style="line-height: 150px;width: 5rem">5件</div>
+            <div class="ribbon">
+                <div class="wrap" style="display:flex;text-align: right;">
+                    <div style="text-align: right;line-height: 150px;color: red;font-size: 16%;" class="price">$0.09</div>
+                    <div style="text-align: right;line-height: 160px;color: red;font-size: 36px;padding-right: 5rem;" class="price">$0.09</div>
+                    <span class="ribbon6">秒杀</span>
+                </div>
+            </div>
+        </div>
+        <div class="card" draggable="true">
+            <img width="250" height="150" src="https://source.unsplash.com/collection/190727/250x150" draggable="false" />
+            <div class="card-text">
+                <h3>Some Title</h3>
+                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
+            </div>
+            <div style="line-height: 150px;width: 5rem">5件</div>
+            <div class="ribbon">
+                <div class="wrap" style="display:flex;text-align: right;">
+                    <div style="text-align: right;line-height: 150px;color: red;font-size: 16%;" class="price">$0.09</div>
+                    <div style="text-align: right;line-height: 160px;color: red;font-size: 36px;padding-right: 5rem;" class="price">$0.09</div>
+                    <span class="ribbon6">秒杀</span>
+                </div>
+            </div>
+        </div>
+        <div class="card" draggable="true">
+            <img width="250" height="150" src="https://source.unsplash.com/user/erondu/likes/250x150" draggable="false" />
+            <div class="card-text">
+                <h3>Some Title</h3>
+                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
+            </div>
+        </div>
+        <div class="card" draggable="true">
+            <img width="250" height="150" src="https://source.unsplash.com/user/erondu/250x150" draggable="false" />
+            <div class="card-text">
+                <h3>Some Title</h3>
+                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
+            </div>
+        </div>
+
+    </div>
+    <script src="http://wow.techbrood.com/libs/babel.min.js"></script>
+    <script src="http://wow.techbrood.com/libs/babel-polyfill.min.js"></script>
+    <script type="text/babel" data-presets="es2015,es2015-loose,es2016,es2017,latest,react,stage-0,stage-1,stage-2,stage-3">
+// helper to find the closest parent by class with on optional stop class to stop searching
+function getInfo(){
+    window.location.href="/goods/detail"
+}
+function closest (el, clazz, stopClazz) {
+    if(el.classList.contains(stopClazz)) return null;
+
+    while ((el = el.parentElement) 
+           && !el.classList.contains(clazz)
+           && !el.classList.contains(stopClazz));
+  
+    return el.classList.contains(stopClazz) ? null : el;
+}
+
+const dnd = (element, options) => {
+  // find all dragable elements
+  var draggableElements = element.querySelectorAll("[draggable=true]")
+  var activeDragElement;
+  var placeholderElement;
+  var startElementRect;
+  console.log("Drag'n'Drop Container: ", element, "Draggable elements: ", draggableElements);
+  
+    // Function responsible for sorting
+   const _onDragOver = function (event) {
+     placeholderElement.style.width = startElementRect.width + "px";
+     placeholderElement.style.height = startElementRect.height + "px";
+     placeholderElement.style.top = startElementRect.top + "px";
+     placeholderElement.style.left = startElementRect.left + "px";
+     console.log("Placeholder: ", placeholderElement, "startRect: ", startElementRect);
+     
+       event.preventDefault();
+       event.dataTransfer.dropEffect = 'move';
+      
+       var target = closest(event.target, 'card', 'playground');
+       if (target && target !== activeDragElement) {  
+          var rect = target.getBoundingClientRect();
+          var horizontal = event.clientY > startElementRect.top && event.clientY < startElementRect.bottom;
+          var next = false;
+         
+          if (horizontal) {
+            next = (event.clientX - rect.left)/(rect.right - rect.left) > .5;
+          } else {
+            next = !((event.clientY - rect.top)/(rect.bottom - rect.top) > .5);
+          }        
+           
+          console.log("onDragOver target classlist: ", target);
+         
+          // insert at new position
+          element.insertBefore(activeDragElement, next && target.nextSibling || target);
+         
+          // update rect for insert poosition calculation
+          startElementRect = activeDragElement.getBoundingClientRect();
+       }
+   }
+  
+  // handle drag event end
+  const _onDragEnd = function (event) {
+       event.preventDefault();
+       
+       placeholderElement.style.width = "0px";
+       placeholderElement.style.height = "0px";
+       placeholderElement.style.top = "0px";
+       placeholderElement.style.left = "0px";
+    
+       activeDragElement.classList.remove('moving');
+       element.removeEventListener('dragover', _onDragOver, false);
+       element.removeEventListener('dragend', _onDragEnd, false);
+  };
+  
+  
+  element.addEventListener("dragstart", function (event) {
+    // don't allow selection to be dragged if it is not draggable
+    if(event.target.getAttribute("draggable") !== "true") {
+      event.preventDefault(); 
+      return;
+    }
+    
+    activeDragElement = event.target;
+    startElementRect = activeDragElement.getBoundingClientRect();
+    
+    // Limiting the movement type
+    event.dataTransfer.effectAllowed = 'move';
+    
+    // setData => Fuinktioniert im IE nicht bzw. nur bedingt
+    // !!!! wird aber scheinbar im Firefox für die Vorschau benötigt
+    //event.dataTransfer.setData('text/html', activeDragElement.innerHtml);
+    event.dataTransfer.setData("text/uri-list", "http://www.mozilla.org");
+    
+     // Subscribing to the events at dnd
+     element.addEventListener('dragover', _onDragOver, false);
+     element.addEventListener('dragend', _onDragEnd, false);
+    
+     activeDragElement.classList.add('moving');
+     
+     // import placeholder
+     placeholderElement = element.querySelector('.tpl-placeholder');
+  });
+};
+
+dnd(document.querySelector(".playground"));
+</script>
+
+</body>
+
+</html>
