@@ -6,8 +6,8 @@ package info.neilqin.common.enums;
  */
 public enum ResultEnum {
 
-    SUCCESS(200,"SUCCESS"),
-    VALIDATOR_ERR(100010,"非法参数:%s");
+    SUCCESS(200,"SUCCESS");
+
 
 
     private int code;

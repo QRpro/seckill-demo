@@ -6,7 +6,8 @@ package info.neilqin.exceptions;
  */
 public class ValidatorException extends GlobalException {
 
-    protected String message;
+
+    public static final ValidatorException VALIDATOR_ERR = new ValidatorException(100010,"非法参数:%s");
 
     public ValidatorException(String message) {
         super(message);
@@ -17,12 +18,16 @@ public class ValidatorException extends GlobalException {
         super(message, cause);
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public ValidatorException(int code,String message,Object... args) {
+        super(code,message,args);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public ValidatorException newInstance(String msgFormat, Object... args) {
+        return new ValidatorException(this.code, msgFormat, args);
     }
+    public ValidatorException format(Object... args) {
+        return new ValidatorException(this.code, this.message, args);
+    }
+
+
 }

@@ -15,7 +15,7 @@ public enum ValidatorEnum {
         @Override
         public void validate(String name, Object val) {
             if (StringUtils.isEmpty(val)){
-                throw new ValidatorException(name);
+                throw ValidatorException.VALIDATOR_ERR.format(name);
             }
         }
     },
@@ -31,7 +31,7 @@ public enum ValidatorEnum {
                 Matcher m = p.matcher(valStr);
                 boolean isMatch = m.matches();
                 if (!isMatch) {
-                    throw new ValidatorException(name);
+                    throw ValidatorException.VALIDATOR_ERR.format(name);
                 }
             }
 
@@ -46,7 +46,7 @@ public enum ValidatorEnum {
             Matcher matcher = regex.matcher(valStr);
             boolean isMatched = matcher.matches();
             if(!isMatched){
-                throw new ValidatorException(name);
+                throw ValidatorException.VALIDATOR_ERR.format(name);
             }
         }
     };

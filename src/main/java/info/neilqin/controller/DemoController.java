@@ -3,12 +3,17 @@ package info.neilqin.controller;
 import info.neilqin.anno.JsonParam;
 import info.neilqin.common.enums.ResultEnum;
 import info.neilqin.common.views.JSONView;
+import info.neilqin.entity.po.GoodsPO;
 import info.neilqin.entity.po.UserPO;
 import info.neilqin.exceptions.ValidatorException;
+import info.neilqin.repository.GoodsDao;
+import info.neilqin.repository.GoodsRepository;
 import info.neilqin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author Neil
@@ -19,10 +24,14 @@ public class DemoController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    GoodsDao goodsRepository;
     @RequestMapping("/t1")
-    public JSONView<String> hello(@JsonParam("name")String name){
-        System.out.println(name);
-        return JSONView.parseSuccess(name);
+    public JSONView<String> hello(){
+        List<GoodsPO> all = goodsRepository.getAll();
+        GoodsPO byId = goodsRepository.getById("1");
+        System.out.println(111);
+        return JSONView.parseSuccess("112");
     }
     @RequestMapping("/t2")
     public JSONView<String> hello2(String name,String age){

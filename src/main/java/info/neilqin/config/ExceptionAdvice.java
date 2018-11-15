@@ -20,24 +20,24 @@ public class ExceptionAdvice {
     @ExceptionHandler(ValidatorException.class)
     @ResponseStatus(HttpStatus.OK)
     public JSONView validateException(ValidatorException e){
-        ResultEnum resultEnum = ResultEnum.VALIDATOR_ERR;
-        return JSONView.parseError(resultEnum.getCode(),String.format(resultEnum.getMessage(), e.getMessage()));
+        return JSONView.parseError(e.getCode(),e.getMessage());
     }
 
     @ExceptionHandler(BusiException.class)
     @ResponseStatus(HttpStatus.OK)
     public JSONView exception(BusiException e){
-        return JSONView.parseError(0,"程序异常"+e.getMessage());
+        return JSONView.parseError(e.getCode(),e.getMessage());
     }
 
     @ExceptionHandler(GlobalException.class)
     @ResponseStatus(HttpStatus.OK)
     public JSONView exception(GlobalException e){
-        return JSONView.parseError(0,"程序异常"+e.getMessage());
+        return JSONView.parseError(0,"程序异常:"+e.getMessage());
     }
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
     public JSONView exception(Exception e){
-        return JSONView.parseError(0,"程序异常"+e.getMessage());
+        e.printStackTrace();
+        return JSONView.parseError(0,"程序异常:"+e.getMessage());
     }
 }

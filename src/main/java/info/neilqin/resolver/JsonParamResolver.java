@@ -49,7 +49,7 @@ public class JsonParamResolver implements HandlerMethodArgumentResolver {
                 val =  jsonParamAnno.defaultValue();
             }
             if (jsonParamAnno.required() && null == val && StringUtils.isEmpty(jsonParamAnno.defaultValue())){
-                throw new ValidatorException(parameterName+"不能为空");
+                throw ValidatorException.VALIDATOR_ERR.format(parameter+"不能为空");
             }
         // 方法上注解
         } else {

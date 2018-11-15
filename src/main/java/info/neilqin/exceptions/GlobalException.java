@@ -6,6 +6,9 @@ package info.neilqin.exceptions;
  */
 public class GlobalException extends RuntimeException {
 
+    protected String message;
+    protected int code;
+
     public GlobalException(String message) {
         super(message);
     }
@@ -14,4 +17,25 @@ public class GlobalException extends RuntimeException {
         super(message, cause);
     }
 
+    public GlobalException(int code ,String message,Object... args){
+        this.code = code;
+        this.message = String.format(message,args);
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 }
