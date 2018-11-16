@@ -1,8 +1,7 @@
 package info.neilqin.entity.po;
 
-import lombok.Data;
-
 import java.util.Date;
+import lombok.Data;
 
 /**
  * @author Neil

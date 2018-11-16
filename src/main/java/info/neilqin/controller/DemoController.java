@@ -1,19 +1,15 @@
 package info.neilqin.controller;
 
 import info.neilqin.anno.JsonParam;
-import info.neilqin.common.enums.ResultEnum;
 import info.neilqin.common.views.JSONView;
 import info.neilqin.entity.po.GoodsPO;
 import info.neilqin.entity.po.UserPO;
-import info.neilqin.exceptions.ValidatorException;
-import info.neilqin.repository.GoodsDao;
 import info.neilqin.repository.GoodsRepository;
 import info.neilqin.repository.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 /**
  * @author Neil
@@ -25,11 +21,10 @@ public class DemoController {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    GoodsDao goodsRepository;
+    GoodsRepository goodsRepository;
     @RequestMapping("/t1")
     public JSONView<String> hello(){
         List<GoodsPO> all = goodsRepository.getAll();
-        GoodsPO byId = goodsRepository.getById("1");
         System.out.println(111);
         return JSONView.parseSuccess("112");
     }
@@ -48,10 +43,6 @@ public class DemoController {
     @RequestMapping("/t5")
     public JSONView<String> hello5(@JsonParam(defaultValue = "张三") String name,String age){
         return JSONView.parseSuccess(name);
-    }
-    @RequestMapping("/t6")
-    public JSONView<UserPO> hello6(Long phone){
-        return JSONView.parseSuccess(this.userRepository.findOne(phone));
     }
 
 }

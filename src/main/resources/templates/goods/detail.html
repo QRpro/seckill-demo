@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
 <style>
@@ -161,8 +161,6 @@ p {
     position: absolute;
     width: 100px;
     height: 495px;
-    margin-left: 150px;
-    margin-top: -35px;
     background: #FFE546;
     z-index: -1;
     /* Skew */
@@ -212,24 +210,26 @@ p {
     -webkit-transform: scale(1.03);
     transform: scale(1.03);
 }
-.button-back:hover {
-    border-top: 120px solid #FF935E;
-    cursor: pointer;
-}
+/*.button-back:hover {*/
+    /*border-top: 120px solid #FF935E;*/
+    /*cursor: pointer;*/
+/*}*/
 .button-back span:hover {
     -ms-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
+.display_btw{
+    background-color: #CCC;
+}
 </style>
 </head>
 <body>
-<script type="text/javascript" src="http://libs.baidu.com/jquery/3.1.2/jquery.min.js"></script><div id="wrapper">
+<div id="wrapper">
     <div class="box">
         <div class="main-container">
             <div class="left-cl">
                 <div class="button-back"><span><svg width="26px" height="26px" viewBox="63 67 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
             <desc>Created with Sketch.</desc>
             <defs></defs>
             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(64.400240, 68.400000)" stroke-linecap="round" stroke-linejoin="round">
@@ -239,23 +239,47 @@ p {
             </g>
         </svg></span>
                 </div>
-                <div class="diagonal"></div>
-                <img src="http://wow.techbrood.com/uploads/1703/backpack_czvars.png">
+                <img width="333"  th:src="${goodsDetail.goods.goodsImg}">
             </div>
+            <div class="diagonal" style="z-index: 3"></div>
             <div class="right-cl">
-                <h1>Fjallraven Kanken</h1>
-                <h3>$86.00</h3>
+                <h1 th:text="${goodsDetail.goods.goodsName}">Fjallraven Kanken</h1>
+                <h3 style="color: red" th:text="${'$ '+goodsDetail.goods.seckillPrice}">$86.00</h3>
                 <h4>简介</h4>
-                <p>Body: 100% Vinyl, Lining: 100% Polyethylene.</p>
+                <p th:text="${goodsDetail.goods.goodsDetail}">Body: 100% Vinyl, Lining: 100% Polyethylene.</p>
                 <h4>库存</h4>
-                <p>1件</p>
-                <button class="basket">秒杀未开始</button>
+                <p th:text="${goodsDetail.goods.stockCount+' 件'}">1件</p>
+                <h4 id="seconds" th:text="${goodsDetail.remainSeconds}"></h4>
+                <button id="seckill_btn" th:class="${goodsDetail.seckillStatus == 1?'basket':'basket display_btw'}" th:disabled="${goodsDetail.seckillStatus!=0}" th:text="${goodsDetail.seckillStatus == 0?'秒杀未开始':goodsDetail.seckillStatus == 1?'秒杀中':'秒杀已结束'}">秒杀未开始</button>
             </div>
         </div>
     </div>
 </div>
+<script src="http://libs.baidu.com/jquery/3.1.2/jquery.min.js"/>
 <script>
-
+    $(function () {
+        countDown();
+    });
+    function countDown() {
+        var remainSeconds = $("#seconds").text();
+        var timeout;
+        if (remainSeconds > 0) {//秒杀还没开始，倒计时
+            timeout = setTimeout(function () {
+                $("#seconds").text(remainSeconds - 1);
+            console.log(remainSeconds)
+                countDown();
+            }, 1000);
+        } else if (remainSeconds == 0) {//秒杀进行中
+            $("#seckill_btn").attr("disabled", false);
+            $("#seckill_btn").removeClass("display_btw");
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            $("#seconds").text("秒杀中");
+        } else {//秒杀已经结束
+            $("#seconds").text("秒杀已经结束");
+        }
+    }
 </script>
 
 </body>

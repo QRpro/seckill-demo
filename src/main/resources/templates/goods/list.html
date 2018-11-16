@@ -11,73 +11,27 @@
         <div class="card-placeholder tpl-placeholder">
         </div>
         <!-- cards to sort -->
-        <div class="card" draggable="true" onclick="getInfo()">
-            <img width="250" height="150" src="https://source.unsplash.com/random/250x150" draggable="false" />
+        <div class="card" draggable="true" th:onclick="'getInfo('+${goods.goodsId}+')'" th:each="goods:${goodsList}">
+            <img width="250" height="150" th:src="${goods.goodsImg}" draggable="false" />
             <div class="card-text">
-                <h3>Some Title</h3>
-                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.asdfasdfasdfasdfasdfasdfasdf..</span>
+                <h3 th:text="${goods.goodsTitle}"></h3>
+                <span th:text="${goods.goodsDetail}"></span>
             </div>
-            <div style="line-height: 150px;width: 10%">5件</div>
+            <div style="line-height: 150px;width: 10%" th:text="${goods.stockCount + '件'}"></div>
             <div class="ribbon">
                 <div class="wrap" style="display: flex">
-                    <div class="price old_price">$0.09</div>
-                    <div class="price">$0.09</div>
+                    <div class="price old_price" th:text="${'$ '+goods.goodsPrice}"></div>
+                    <div class="price" th:text="${'$ '+goods.seckillPrice}">$0.09</div>
                     <span class="ribbon6">秒杀</span>
                 </div>
             </div>
         </div>
-        <div class="card" draggable="true">
-            <img width="250" height="150" src="https://source.unsplash.com/category/buildings/250x150" draggable="false" />
-            <div class="card-text">
-                <h3>Some Title</h3>
-                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
-            </div>
-            <div style="line-height: 150px;width: 5rem">5件</div>
-            <div class="ribbon">
-                <div class="wrap" style="display:flex;text-align: right;">
-                    <div style="text-align: right;line-height: 150px;color: red;font-size: 16%;" class="price">$0.09</div>
-                    <div style="text-align: right;line-height: 160px;color: red;font-size: 36px;padding-right: 5rem;" class="price">$0.09</div>
-                    <span class="ribbon6">秒杀</span>
-                </div>
-            </div>
-        </div>
-        <div class="card" draggable="true">
-            <img width="250" height="150" src="https://source.unsplash.com/collection/190727/250x150" draggable="false" />
-            <div class="card-text">
-                <h3>Some Title</h3>
-                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
-            </div>
-            <div style="line-height: 150px;width: 5rem">5件</div>
-            <div class="ribbon">
-                <div class="wrap" style="display:flex;text-align: right;">
-                    <div style="text-align: right;line-height: 150px;color: red;font-size: 16%;" class="price">$0.09</div>
-                    <div style="text-align: right;line-height: 160px;color: red;font-size: 36px;padding-right: 5rem;" class="price">$0.09</div>
-                    <span class="ribbon6">秒杀</span>
-                </div>
-            </div>
-        </div>
-        <div class="card" draggable="true">
-            <img width="250" height="150" src="https://source.unsplash.com/user/erondu/likes/250x150" draggable="false" />
-            <div class="card-text">
-                <h3>Some Title</h3>
-                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
-            </div>
-        </div>
-        <div class="card" draggable="true">
-            <img width="250" height="150" src="https://source.unsplash.com/user/erondu/250x150" draggable="false" />
-            <div class="card-text">
-                <h3>Some Title</h3>
-                <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam...</span>
-            </div>
-        </div>
-
     </div>
     <script src="http://wow.techbrood.com/libs/babel.min.js"></script>
     <script src="http://wow.techbrood.com/libs/babel-polyfill.min.js"></script>
     <script type="text/babel" data-presets="es2015,es2015-loose,es2016,es2017,latest,react,stage-0,stage-1,stage-2,stage-3">
-// helper to find the closest parent by class with on optional stop class to stop searching
-function getInfo(){
-    window.location.href="/goods/detail"
+function getInfo(goodsId){
+    window.location.href="/goods/detail?goodsId="+goodsId;
 }
 function closest (el, clazz, stopClazz) {
     if(el.classList.contains(stopClazz)) return null;
