@@ -13,6 +13,7 @@ public class UserPO {
     private Long id;
     private String nickname;
     private String password;
+    private String phone;
     private String salt;
     private String head;
     private Date registerDate;

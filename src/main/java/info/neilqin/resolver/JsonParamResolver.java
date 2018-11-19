@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import info.neilqin.anno.JsonParam;
 import info.neilqin.exceptions.ValidatorException;
 import info.neilqin.utils.ServletUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.WebDataBinder;

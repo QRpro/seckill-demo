@@ -9,6 +9,8 @@ public class GlobalException extends RuntimeException {
     protected String message;
     protected int code;
 
+    public static final GlobalException SYSTEM_ERR = new GlobalException(0,"系统异常");
+
     public GlobalException(String message) {
         super(message);
     }
@@ -19,7 +21,7 @@ public class GlobalException extends RuntimeException {
 
     public GlobalException(int code ,String message,Object... args){
         this.code = code;
-        this.message = String.format(message,args);
+        this.message = args.length > 0?String.format(message,args):message;
     }
 
     @Override

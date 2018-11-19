@@ -2,6 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,800');
@@ -179,7 +180,7 @@ p {
     top: 0;
     border-top: 120px solid #FF7372;
     border-right: 70px solid transparent;
-    -webkit-transform: rotate(360deg)
+    -webkit-transform: rotate(360deg);
     /* ANIMATION */
     
     -o-transition: color .3s ease-out, border-top .3s ease-in;
@@ -255,7 +256,8 @@ p {
         </div>
     </div>
 </div>
-<script src="http://libs.baidu.com/jquery/3.1.2/jquery.min.js"/>
+
+
 <script>
     $(function () {
         countDown();
@@ -266,7 +268,7 @@ p {
         if (remainSeconds > 0) {//秒杀还没开始，倒计时
             timeout = setTimeout(function () {
                 $("#seconds").text(remainSeconds - 1);
-            console.log(remainSeconds)
+                console.log(remainSeconds)
                 countDown();
             }, 1000);
         } else if (remainSeconds == 0) {//秒杀进行中
@@ -281,6 +283,5 @@ p {
         }
     }
 </script>
-
 </body>
 </html>

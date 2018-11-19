@@ -6,7 +6,7 @@ package info.neilqin.exceptions;
  */
 public class BusiException extends GlobalException {
 
-    private static final BusiException PWD_ERR = new BusiException(100001,"密码错误");
+    public static final BusiException NEED_LOGIN = new BusiException(200001,"未登录");
 
     public BusiException(String message) {
         super(message);

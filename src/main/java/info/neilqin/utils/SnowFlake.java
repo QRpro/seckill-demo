@@ -1,7 +1,7 @@
 package info.neilqin.utils;
 
 /**
- * twitter的snowflake算法 -- java实现
+ * snowflake
  */
 public class SnowFlake {
 
@@ -57,6 +57,9 @@ public class SnowFlake {
         this.machineId = machineId;
     }
 
+    public static SnowFlake getInstance(){
+        return new SnowFlake(1L,1L);
+    }
     /**
      * 产生下一个ID
      *
