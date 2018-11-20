@@ -251,7 +251,7 @@ p {
                 <h4>库存</h4>
                 <p th:text="${goodsDetail.goods.stockCount+' 件'}">1件</p>
                 <h4 id="seconds" th:text="${goodsDetail.remainSeconds}"></h4>
-                <button id="seckill_btn" th:class="${goodsDetail.seckillStatus == 1?'basket':'basket display_btw'}" th:disabled="${goodsDetail.seckillStatus!=0}" th:text="${goodsDetail.seckillStatus == 0?'秒杀未开始':goodsDetail.seckillStatus == 1?'秒杀中':'秒杀已结束'}">秒杀未开始</button>
+                <button id="seckill_btn" th:onclick="${'getSeckillUri(\''+goodsDetail.goods.id+'\')'}" th:class="${goodsDetail.seckillStatus == 1?'basket':'basket display_btw'}" th:disabled="${goodsDetail.seckillStatus!=0}" th:text="${goodsDetail.seckillStatus == 0?'秒杀未开始':goodsDetail.seckillStatus == 1?'秒杀中':'秒杀已结束'}">秒杀未开始</button>
             </div>
         </div>
     </div>
@@ -281,6 +281,20 @@ p {
         } else {//秒杀已经结束
             $("#seconds").text("秒杀已经结束");
         }
+    }
+    function getSeckillUri(id) {
+        $.ajax({
+            url: "/seckill/path/"+id,
+            type: "GET",
+            dataType: 'json',
+            success: function (result) {
+                if (result.responseCode == 200) {
+                    alert(result)
+                } else {
+                    alert(result.msg)
+                }
+            }
+        });
     }
 </script>
 </body>

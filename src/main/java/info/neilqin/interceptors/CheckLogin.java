@@ -30,7 +30,7 @@ public @interface CheckLogin {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // 判断类和方法上是否有注解
             if (handlerMethod.hasMethodAnnotation(CheckLogin.class)||handlerMethod.getBeanType().getAnnotation(CheckLogin.class)!=null){
-                // 登录拦截可用注解实现 具体胆码请参照 LoginResolver
+                // 登录拦截也可用注解实现 具体胆码请参照 LoginResolver
                 log.info("============= request uri : {} =============",request.getRequestURI());
             }
             return true;

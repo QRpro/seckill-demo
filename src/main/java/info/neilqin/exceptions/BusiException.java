@@ -7,6 +7,7 @@ package info.neilqin.exceptions;
 public class BusiException extends GlobalException {
 
     public static final BusiException NEED_LOGIN = new BusiException(200001,"未登录");
+    public static final BusiException SECKILL_FAILED = new BusiException(200002,"秒杀失败");
 
     public BusiException(String message) {
         super(message);
