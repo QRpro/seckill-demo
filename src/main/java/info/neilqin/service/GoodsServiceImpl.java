@@ -26,4 +26,9 @@ public class GoodsServiceImpl implements IGoodsService{
     public GoodsVO getGoodsSeckillDetail(Long goodsId) {
         return this.goodsRepository.getGoodsSkillInfoByGoodsId(goodsId);
     }
+
+    @Override
+    public boolean reduceStock(Long goodsId) {
+        return this.goodsRepository.reduceStock(goodsId)>0;
+    }
 }

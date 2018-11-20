@@ -14,7 +14,7 @@ public class OrderInfoPO {
     private Long goodsId;
     private Long deliveryAddrId;
     private String goodsName;
-    private String goodsCount;
+    private Integer goodsCount;
     private Float goodsPrice;
     private Integer orderChannel;
     private Integer status;

@@ -8,7 +8,22 @@ import java.util.List;
  * @date Create in 1:05 2018/11/15
  */
 public interface IGoodsService {
+    /**
+     * @return
+     */
     List<GoodsVO> findAll();
 
+    /**
+     * 获取秒杀商品详情
+     * @param goodsId
+     * @return
+     */
     GoodsVO getGoodsSeckillDetail(Long goodsId);
+
+    /**
+     * 减库存
+     * @param goodsId
+     * @return
+     */
+    boolean reduceStock(Long goodsId);
 }

@@ -13,6 +13,11 @@ public interface Constants {
         public static final String REDIS_TOKEN_KEY = "TOKEN:%s";
         public static final String REDIS_USER_KEY = "USER:%s";
         public static final String REDIS_SECKILL_TOKEN = "SECKILL_TOKEN:%s";
+        public static final String REDIS_GOODS_STORAGE = "GOODS_STORAGE:%s";
+        public static final String REDIS_SECKILL_RECORD = "SECKILL_ORDER:%s";
+    }
+    class Queue{
+        public static final String SECKILL_QUEUE = "SECKILL.QUEUE";
     }
 
     class RedisKey{
@@ -25,6 +30,11 @@ public interface Constants {
         public static String seckillTokenKey(Long userId,Long goodsId){
             return String.format(Catch.REDIS_SECKILL_TOKEN,userId+"_"+goodsId);
         }
-
+        public static String goodsStorageKey(Long goodsId){
+            return String.format(Catch.REDIS_GOODS_STORAGE,goodsId.toString());
+        }
+        public static String seckillOrderKey(Long userId,Long goodsId){
+            return String.format(Catch.REDIS_SECKILL_RECORD,userId+"_"+goodsId);
+        }
     }
 }

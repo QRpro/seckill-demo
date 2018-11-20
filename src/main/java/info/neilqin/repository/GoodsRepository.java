@@ -5,6 +5,7 @@ import info.neilqin.entity.vo.GoodsVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -21,4 +22,7 @@ public interface GoodsRepository{
     List<GoodsVO> getGoodsSkillInfo();
     @Select("select gs.id,gs.goods_id ,gs.seckill_price ,gs.stock_count,gs.start_date,gs.end_date,g.goods_name,g.goods_title,g.goods_img,g.goods_detail,g.goods_price from sk_goods_seckill gs,sk_goods g where gs.goods_id = g.id and gs.goods_id=#{goodsId}")
     GoodsVO getGoodsSkillInfoByGoodsId(@Param("goodsId") Long goodsId);
+
+    @Update("update sk_goods_seckill set stock_count = stock_count-1 where where goods_id = #{goodsId} and stock_count > 0")
+    int reduceStock(Long goodsId);
 }

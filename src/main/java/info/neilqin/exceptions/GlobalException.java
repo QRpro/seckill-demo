@@ -10,6 +10,7 @@ public class GlobalException extends RuntimeException {
     protected int code;
 
     public static final GlobalException SYSTEM_ERR = new GlobalException(0,"系统异常");
+    public static final GlobalException REQUEST_ILLEGAL = new GlobalException(-1,"非法请求");
 
     public GlobalException(String message) {
         super(message);
