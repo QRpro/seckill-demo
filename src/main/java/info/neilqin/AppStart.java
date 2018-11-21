@@ -1,8 +1,11 @@
 package info.neilqin;
 
+import info.neilqin.common.constants.Constants;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author Neil

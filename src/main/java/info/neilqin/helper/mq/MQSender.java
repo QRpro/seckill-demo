@@ -1,5 +1,6 @@
 package info.neilqin.helper.mq;
 
+import info.neilqin.common.constants.Constants;
 import info.neilqin.entity.po.OrderPO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -19,6 +20,6 @@ public class MQSender {
 
     public void  sendSeckillMsg(SeckillMsg msg){
         log.info("send seckill msg : {}",msg);
-        this.amqpTemplate.convertAndSend(msg);
+        this.amqpTemplate.convertAndSend(Constants.Queue.SECKILL_QUEUE,msg);
     }
 }

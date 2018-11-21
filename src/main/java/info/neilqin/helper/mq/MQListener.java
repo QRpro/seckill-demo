@@ -9,6 +9,7 @@ import info.neilqin.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,9 +24,12 @@ public class MQListener {
     IGoodsService goodsService;
     @Autowired
     IOrderService orderService;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @RabbitListener(queues = Constants.Queue.SECKILL_QUEUE)
     public void receive(SeckillMsg msg){
+        log.info("MQListener receive msg :{}", msg);
         GoodsVO goods = this.goodsService.getGoodsSeckillDetail(msg.getGoodsId());
         Integer stock = goods.getStockCount();
         if (stock <= 0){
@@ -35,7 +39,13 @@ public class MQListener {
         if (null != order){
             return;
         }
-        orderService.seckill(msg.getUser(),goods);
+        try {
+            orderService.seckill(msg.getUser(),goods);
+        }catch (Exception e){
+            // 执行失败库存+1
+            e.printStackTrace();
+            redisTemplate.opsForValue().increment(Constants.RedisKey.goodsStorageKey(goods.getGoodsId()));
+        }
     }
 
 }

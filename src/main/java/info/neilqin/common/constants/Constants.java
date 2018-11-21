@@ -19,6 +19,11 @@ public interface Constants {
     class Queue{
         public static final String SECKILL_QUEUE = "SECKILL.QUEUE";
     }
+    class SeckillStatus{
+        public static final int SECKILL_FAILED = -1;
+        public static final int SECKILL_SUCCESS = 1;
+        public static final int SECKILL_INQUEUE = 0;
+    }
 
     class RedisKey{
         public static String tokenKey(String token){

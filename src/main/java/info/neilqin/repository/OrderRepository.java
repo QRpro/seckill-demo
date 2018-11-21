@@ -1,6 +1,5 @@
 package info.neilqin.repository;
 
-import info.neilqin.entity.po.OrderInfoPO;
 import info.neilqin.entity.po.OrderPO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,11 +12,9 @@ import org.apache.ibatis.annotations.SelectKey;
 @Mapper
 public interface OrderRepository {
 
-    @Insert("insert into order_info(user_id, goods_id, goods_name, goods_count, goods_price, order_channel, status, create_date)values("
-            + "#{userId}, #{goodsId}, #{goodsName}, #{goodsCount}, #{goodsPrice}, #{orderChannel},#{status},#{createDate} )")
+    @Insert("insert into sk_order(id,user_id, goods_id, goods_name, goods_count, goods_price,transaction_price, order_channel, status,is_seckill, create_date)values("
+            + "#{id},#{userId}, #{goodsId}, #{goodsName}, #{goodsCount}, #{goodsPrice},#{transactionPrice}, #{orderChannel},#{status},#{isSeckill},#{createDate} )")
     @SelectKey(keyColumn="id", keyProperty="id", resultType=long.class, before=false, statement="select last_insert_id()")
-    void insert(OrderInfoPO orderInfo);
+    void insert(OrderPO order);
 
-    @Insert("insert into miaosha_order (user_id, goods_id, order_id)values(#{userId}, #{goodsId}, #{orderId})")
-    void insertSeckillOrder(OrderPO seckillOrder);
 }

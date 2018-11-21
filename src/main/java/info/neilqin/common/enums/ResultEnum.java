@@ -6,7 +6,8 @@ package info.neilqin.common.enums;
  */
 public enum ResultEnum {
 
-    SUCCESS(200,"SUCCESS");
+    SUCCESS(200,"SUCCESS"),
+    IN_QUEUE(201,"InQueue");
 
 
 

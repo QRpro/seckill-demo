@@ -9,4 +9,6 @@ public interface ISeckillService {
     String getSeckillPath(Long goodsId, UserPO user);
 
     void seckill(String token, Long goodsId, UserPO user);
+
+    long getSeckillResult(Long id, Long goodsId);
 }

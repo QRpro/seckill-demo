@@ -3,7 +3,6 @@ package info.neilqin.resolver;
 import info.neilqin.api.IUserService;
 import info.neilqin.common.constants.Constants;
 import info.neilqin.entity.po.UserPO;
-import info.neilqin.exceptions.BusiException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +43,7 @@ public class LoginResolver implements HandlerMethodArgumentResolver{
         if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
             if (!isLoginUri){
                 response.sendRedirect(LOGIN_URI);
+                return null;
             }
         }
         String token = StringUtils.isEmpty(paramToken) ? cookieToken : paramToken;

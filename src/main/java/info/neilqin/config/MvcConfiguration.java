@@ -35,6 +35,8 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CheckLogin.LoginInterceptor());
+        // 静态资源不做拦截   springboot已经做好了静态资源映射
+        registry.addInterceptor(new CheckLogin.LoginInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/static/**");
     }
 }
