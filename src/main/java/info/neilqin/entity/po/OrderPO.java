@@ -11,7 +11,6 @@ import lombok.Data;
 public class OrderPO {
     private Long id;
     private Long userId;
-    private Long orderId;
     private Long goodsId;
     private Long deliveryAddrId;
     private Float transactionPrice;

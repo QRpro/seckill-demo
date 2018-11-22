@@ -29,6 +29,14 @@ public class EncryptUtils {
         }
         return resultString;
     }
+    public static String saltEncrypt(String salt,String pwd){
+        int length = salt.length();
+        if (length == 0){return pwd;}
+        StringBuffer sb = new StringBuffer();
+        sb.append(salt.substring(0,salt.length()/2))
+                .append(pwd).append(salt.substring(salt.length()/2));
+        return sb.toString();
+    }
 
     public static String getRandomSalt(int length){
         String a = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

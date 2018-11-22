@@ -25,17 +25,9 @@ public class UserHelper {
     RedisTemplate redisTemplate;
 
     public boolean checkPwd(String dbPwd, String salt, String pwd) {
-        return dbPwd.equals(EncryptUtils.Md5Encrypt(this.saltEncrypt(salt, pwd)));
+        return dbPwd.equals(EncryptUtils.Md5Encrypt(EncryptUtils.saltEncrypt(salt, pwd)));
     }
 
-    private String saltEncrypt(String salt,String pwd){
-        int length = salt.length();
-        if (length == 0){return pwd;}
-        StringBuffer sb = new StringBuffer();
-        sb.append(salt.substring(0,salt.length()/2))
-                .append(pwd).append(salt.substring(salt.length()/2));
-        return sb.toString();
-    }
 
     public void addCookie(HttpServletResponse httpServletResponse, String token,UserPO user) {
         int maxAge = 2*24*60*60;
@@ -51,7 +43,7 @@ public class UserHelper {
         user.setId(SnowFlake.getInstance().nextId());
         String salt = EncryptUtils.getRandomSalt(SALT_LENGTH);
         user.setSalt(salt);
-        String s = this.saltEncrypt(salt, pwd);
+        String s = EncryptUtils.saltEncrypt(salt, pwd);
         user.setPassword(EncryptUtils.Md5Encrypt(s));
         user.setPhone(phone);
         user.setNickname(nickName);
