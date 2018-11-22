@@ -7,11 +7,11 @@ import info.neilqin.entity.po.OrderPO;
 import info.neilqin.entity.po.UserPO;
 import info.neilqin.exceptions.BusiException;
 import info.neilqin.exceptions.GlobalException;
-import info.neilqin.exceptions.ValidatorException;
 import info.neilqin.helper.mq.MQSender;
 import info.neilqin.helper.mq.SeckillMsg;
 import info.neilqin.utils.RandomUtils;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -32,9 +32,13 @@ public class SeckillServiceImpl implements ISeckillService {
 
     @Override
     public String getSeckillPath(Long goodsId, UserPO user) {
-        String uuid = RandomUtils.UUID32();
-        this.redisTemplate.opsForValue().set(Constants.RedisKey.seckillTokenKey(user.getId(), goodsId), uuid,10, TimeUnit.SECONDS);
-        return uuid;
+        String key = Constants.RedisKey.seckillTokenKey(user.getId(),goodsId);
+        String token = (String) this.redisTemplate.opsForValue().get(key);
+        if(StringUtils.isEmpty(token)){
+            token = RandomUtils.UUID32();
+            this.redisTemplate.opsForValue().set(key, token,1,TimeUnit.MINUTES);
+        }
+        return token;
     }
 
     @Override
@@ -43,14 +47,14 @@ public class SeckillServiceImpl implements ISeckillService {
         Object obj = this.redisTemplate.opsForValue().get(Constants.RedisKey.seckillTokenKey(user.getId(), goodsId));
         if (obj == null){throw GlobalException.REQUEST_ILLEGAL;}
         if (!token.equals(obj.toString())){throw GlobalException.REQUEST_ILLEGAL;}
-        //检查库存
-        Long decrement = this.redisTemplate.opsForValue().decrement(Constants.RedisKey.goodsStorageKey(goodsId));
-        if (decrement < 0){throw BusiException.SECKILL_OVER;}
         //是否重复秒杀
         OrderPO order = this.orderService.findSeckillOrderByUidAndGid(user.getId(),goodsId);
         if (order!=null){
             throw BusiException.SECKILL_REPEAT;
         }
+        //检查库存
+        Long decrement = this.redisTemplate.opsForValue().decrement(Constants.RedisKey.goodsStorageKey(goodsId));
+        if (decrement < 0){throw BusiException.SECKILL_OVER;}
         // 消息入队
         SeckillMsg msg = new SeckillMsg();
         msg.setGoodsId(goodsId);

@@ -43,8 +43,8 @@ public class MQListener {
             orderService.seckill(msg.getUser(),goods);
         }catch (Exception e){
             // 执行失败库存+1
-            e.printStackTrace();
             redisTemplate.opsForValue().increment(Constants.RedisKey.goodsStorageKey(goods.getGoodsId()));
+            throw e;
         }
     }
 

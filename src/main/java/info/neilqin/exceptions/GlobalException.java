@@ -11,6 +11,7 @@ public class GlobalException extends RuntimeException {
 
     public static final GlobalException SYSTEM_ERR = new GlobalException(0,"系统异常");
     public static final GlobalException REQUEST_ILLEGAL = new GlobalException(-1,"非法请求");
+    public static final GlobalException REQUEST_LIMIT = new GlobalException(100,"服务器繁忙");
 
     public GlobalException(String message) {
         super(message);

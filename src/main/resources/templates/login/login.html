@@ -10,16 +10,16 @@
 	<meta name="description" content="" /> 
 
 	<link rel="stylesheet" type="text/css" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 </head>
 
 <body>
 
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('/static/images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title p-b-49">登录</span>
@@ -54,8 +54,8 @@
 		</div>
 	</div>
 
-	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-	<script th:src="@{/js/md5.min.js}"></script>
+	<script src="/static/js/jquery-3.2.1.min.js"></script>
+	<script src="/static/js/md5.min.js"></script>
 	<script>
 		function login() {
             event.preventDefault()

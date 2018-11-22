@@ -263,8 +263,9 @@ p {
 </div>
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script th:src="@{/layer/layer.js}"></script>
+<script src="/static/layer/layer.js"></script>
 <script>
+
     $(function () {
         countDown();
     });
@@ -295,9 +296,10 @@ p {
             url:"/seckill/result",
             type:"GET",
             data:{
-                goodsId:$("#goodsId").val(),
+                goodsId:id,
             },
             success:function(data){
+    console.log("seckill result",data)
                 if(data.responseCode == 200){
                     var result = data.data
                     if (result = 1) {
@@ -347,15 +349,12 @@ p {
                         }),
                         success: function (result) {
                             if (result.responseCode == 200) {
-                                console.log(result)
                                 getSeckillResult(id);
                             } else {
-                                layer.msg("对不起，秒杀失败");
+                                layer.msg(result.msg);
                             }
                         }
                     });
-
-                    console.log(result)
                 } else {
                     alert(result.msg)
                 }
