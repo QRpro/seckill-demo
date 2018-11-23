@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/user")
-public class LoginController {
+public class UserController {
 
     @Autowired
     IUserService userService;
@@ -36,10 +36,10 @@ public class LoginController {
     }
 
     @PostMapping("/to_login")
-    public JSONView<ResultEnum> login(@JsonParam @Validator(ValidatorEnum.PHONE) String phone,
+    public JSONView<String> login(@JsonParam @Validator(ValidatorEnum.PHONE) String phone,
                                       @JsonParam @Validator(ValidatorEnum.NOT_BLANK) String pwd){
-        this.userService.login(httpServletResponse,phone,pwd);
-        return JSONView.parseSuccess(ResultEnum.SUCCESS);
+        String token = this.userService.login(httpServletResponse, phone, pwd);
+        return JSONView.parseSuccess(token);
     }
 
     @PostMapping("/signup")

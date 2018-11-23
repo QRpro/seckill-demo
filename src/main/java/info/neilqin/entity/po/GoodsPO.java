@@ -13,6 +13,6 @@ public class GoodsPO {
     private String goodsTitle;
     private String goodsImg;
     private String goodsDetail;
-    private String goodsPrice;
-    private String goodsStock;
+    private Float goodsPrice;
+    private Integer goodsStock;
 }

@@ -40,7 +40,7 @@ public class UserHelper {
 
     public UserPO createUser(String phone, String pwd,String nickName) {
         UserPO user = new UserPO();
-        user.setId(SnowFlake.getInstance().nextId());
+        user.setId(SnowFlake.instance.nextId());
         String salt = EncryptUtils.getRandomSalt(SALT_LENGTH);
         user.setSalt(salt);
         String s = EncryptUtils.saltEncrypt(salt, pwd);

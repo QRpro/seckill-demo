@@ -51,13 +51,13 @@ public class OrderService implements IOrderService{
         order.setGoodsCount(1);
         order.setGoodsId(goods.getId());
         order.setGoodsName(goods.getGoodsName());
-        order.setGoodsPrice(goods.getSeckillPrice());
+        order.setGoodsPrice(goods.getGoodsPrice());
         order.setOrderChannel(1);
         order.setStatus(0);
         order.setUserId(user.getId());
         order.setIsSeckill(1);
         order.setTransactionPrice(goods.getSeckillPrice());
-        order.setId(SnowFlake.getInstance().nextId());
+        order.setId(SnowFlake.instance.nextId());
         this.orderRepository.insert(order);
         return order;
     }

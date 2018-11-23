@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse; /**
  */
 public interface IUserService {
 
-    void login(HttpServletResponse httpServletResponse, String phone, String pwd);
+    String login(HttpServletResponse httpServletResponse, String phone, String pwd);
 
     void signUp(String phone, String pwd,String nickname);
 

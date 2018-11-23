@@ -23,7 +23,7 @@ public class UserServiceImpl implements IUserService {
     UserHelper userHelper;
 
     @Override
-    public void login(HttpServletResponse httpServletResponse, String phone, String pwd) {
+    public String login(HttpServletResponse httpServletResponse, String phone, String pwd) {
         UserPO user = this.userRepository.getByPhone(phone);
         if(null == user){throw ValidatorException.USER_NOT_EXIST;}
         String dbPwd = user.getPassword();
@@ -33,6 +33,7 @@ public class UserServiceImpl implements IUserService {
         String token = UUID.randomUUID().toString();
         this.userRepository.recordLogin(user.getId());
         this.userHelper.addCookie(httpServletResponse,token,user);
+        return token;
     }
 
     @Override
