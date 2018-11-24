@@ -1,7 +1,7 @@
 #基于SpringBoot的秒杀系统示例
 ---
 
-###项目环境搭建
+### 项目环境搭建
 - 操作系统： Windows
 - IDE： IntelliJ IDEA
 - JDK： 1.8， Stream API 真香
@@ -10,11 +10,11 @@
 - 依赖管理工具 : Maven
 - MQ : RabbitMQ
 
-###其他：  
+### 其他：  
 - Navicat Premium
 - Redis Desktop Manager
 
-###包含技术点：  
+### 包含技术点：  
 - SpringBoot相关集成
 - JavaBean 配置方式
 - 自定义拦截器
