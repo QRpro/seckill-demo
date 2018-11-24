@@ -14,6 +14,7 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 import org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory;
 
 /**
+ * Rabbit 序列化配置类
  * @author Neil
  * @date 2018/11/21 18:04
  */

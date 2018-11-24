@@ -26,11 +26,11 @@ public @interface CheckLogin {
 
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-            if (!(handler instanceof HandlerMethod)){return false;}
+            if (!(handler instanceof HandlerMethod)){return true;}
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // 判断类和方法上是否有注解
             if (handlerMethod.hasMethodAnnotation(CheckLogin.class)||handlerMethod.getBeanType().getAnnotation(CheckLogin.class)!=null){
-                // 登录拦截也可用注解实现 具体胆码请参照 LoginResolver
+                // 登录拦截也可用注解或aop实现 具体胆码请参照 LoginResolver
                 log.info("============= request uri : {} =============",request.getRequestURI());
             }
             return true;

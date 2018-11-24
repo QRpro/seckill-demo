@@ -1,15 +1,13 @@
 package info.neilqin.common.enums;
 
 /**
+ * 响应状态码
  * @author Neil
  * @date 2018/11/14 11:47
  */
 public enum ResultEnum {
 
-    SUCCESS(200,"SUCCESS"),
-    IN_QUEUE(201,"InQueue");
-
-
+    SUCCESS(200,"SUCCESS");
 
     private int code;
     private String message;

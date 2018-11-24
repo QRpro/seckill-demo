@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 用户相关Controller
  * @author Neil
  * @date 2018/11/15 10:18
  */
@@ -29,6 +30,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginHome(UserPO user){
+        // 已登录直接跳转列表页
         if (user!=null){
             return "redirect:/goods/list";
         }

@@ -4,7 +4,6 @@ import info.neilqin.common.constants.Constants;
 import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.context.request.NativeWebRequest;
 
 /**
  * @author Neil
@@ -12,8 +11,7 @@ import org.springframework.web.context.request.NativeWebRequest;
  */
 public class ServletUtils {
 
-    public static String getRequestBody(NativeWebRequest webRequest) {
-        HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
+    public static String getRequestBody(HttpServletRequest servletRequest) {
         String jsonBody = (String) servletRequest.getAttribute(Constants.Catch.JSON_REQUEST_BODY);
         if (jsonBody == null) {
             try {

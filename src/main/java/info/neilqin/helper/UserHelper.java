@@ -24,10 +24,16 @@ public class UserHelper {
     @Autowired
     RedisTemplate redisTemplate;
 
+    /**
+     * 密码校验
+     * @param dbPwd
+     * @param salt
+     * @param pwd
+     * @return
+     */
     public boolean checkPwd(String dbPwd, String salt, String pwd) {
         return dbPwd.equals(EncryptUtils.Md5Encrypt(EncryptUtils.saltEncrypt(salt, pwd)));
     }
-
 
     public void addCookie(HttpServletResponse httpServletResponse, String token,UserPO user) {
         int maxAge = 2*24*60*60;
@@ -38,6 +44,13 @@ public class UserHelper {
         httpServletResponse.addCookie(cookie);
     }
 
+    /**
+     * 创建用户
+     * @param phone
+     * @param pwd
+     * @param nickName
+     * @return
+     */
     public UserPO createUser(String phone, String pwd,String nickName) {
         UserPO user = new UserPO();
         user.setId(SnowFlake.instance.nextId());
@@ -51,6 +64,11 @@ public class UserHelper {
         return user;
     }
 
+    /**
+     * 获取Token
+     * @param token
+     * @return
+     */
     public UserPO getUserByToken(String token) {
         Object obj = this.redisTemplate.opsForValue().get(Constants.RedisKey.tokenKey(token));
         if (obj == null){return null;}

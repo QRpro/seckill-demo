@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * MVC 配置类
  * @author Neil
  * @date 2018/11/14 11:23
  */
@@ -36,7 +37,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 静态资源不做拦截   springboot已经做好了静态资源映射
+        // 静态资源不做拦截
         registry.addInterceptor(new CheckLogin.LoginInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/static/**");
     }

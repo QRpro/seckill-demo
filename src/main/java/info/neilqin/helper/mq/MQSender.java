@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * MQ 入队
  * @author Neil
  * @date Create in 0:40 2018/11/21
  */

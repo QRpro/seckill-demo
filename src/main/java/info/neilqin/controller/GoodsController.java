@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 商品相关Controller
  * @author Neil
  * @date 2018/11/15 16:51
  */

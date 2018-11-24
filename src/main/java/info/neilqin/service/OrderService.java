@@ -35,7 +35,7 @@ public class OrderService implements IOrderService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void seckill(UserPO user, GoodsVO goods) {
+    public void seckillByBD(UserPO user, GoodsVO goods) {
         // 减库存
         boolean success = goodsService.reduceStock(goods.getGoodsId());
         if (!success){return;}

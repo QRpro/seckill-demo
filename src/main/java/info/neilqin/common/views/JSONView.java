@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.servlet.View;
 
 /**
+ * 响应VIEW
  * @author Neil
  * @date 2018/11/14 11:26
  */

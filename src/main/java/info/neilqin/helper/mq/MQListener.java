@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
+ * MQ监听类
  * @author Neil
  * @date Create in 0:48 2018/11/21
  */
@@ -40,7 +41,7 @@ public class MQListener {
             return;
         }
         try {
-            orderService.seckill(msg.getUser(),goods);
+            orderService.seckillByBD(msg.getUser(),goods);
         }catch (Exception e){
             // 执行失败库存+1
             redisTemplate.opsForValue().increment(Constants.RedisKey.goodsStorageKey(goods.getGoodsId()));

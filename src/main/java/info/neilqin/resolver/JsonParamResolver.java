@@ -2,8 +2,10 @@ package info.neilqin.resolver;
 
 import com.alibaba.fastjson.JSONObject;
 import info.neilqin.anno.JsonParam;
+import info.neilqin.exceptions.GlobalException;
 import info.neilqin.exceptions.ValidatorException;
 import info.neilqin.utils.ServletUtils;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -30,8 +32,13 @@ public class JsonParamResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+        HttpServletRequest httpServletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
+        if (null == httpServletRequest){throw GlobalException.SYSTEM_ERR;}
+        if ("GET".equalsIgnoreCase(httpServletRequest.getMethod())){
+            return httpServletRequest.getParameter(parameter.getParameterName());
+        }
         // 获取请求体
-        String requestBody = ServletUtils.getRequestBody(webRequest);
+        String requestBody = ServletUtils.getRequestBody(httpServletRequest);
         JSONObject jsonObject = JSONObject.parseObject(requestBody);
         Object val;
         // 参数名称
@@ -42,16 +49,19 @@ public class JsonParamResolver implements HandlerMethodArgumentResolver {
             // 获取请求体 value 属性
             if (StringUtils.isNotEmpty(jsonParamAnno.value())){
                 val = jsonObject.get(jsonParamAnno.value());
+            // 没有的话获取参数名称
             } else {
                 val = jsonObject.get(parameterName);
             }
+            // 是否有默认值
             if (null == val && StringUtils.isNotEmpty(jsonParamAnno.defaultValue())){
                 val =  jsonParamAnno.defaultValue();
             }
+            // 是否必须
             if (jsonParamAnno.required() && null == val && StringUtils.isEmpty(jsonParamAnno.defaultValue())){
                 throw ValidatorException.VALIDATOR_ERR.format(parameter+"不能为空");
             }
-        // 方法上注解
+        // 方法上注解 直接读取参数名称
         } else {
             val = jsonObject.get(parameterName);
         }

@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
+ * 初始化Redis 商品库存
  * @author Neil
  * @date 2018/11/21 16:14
  */

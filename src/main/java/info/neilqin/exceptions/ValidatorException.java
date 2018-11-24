@@ -1,6 +1,7 @@
 package info.neilqin.exceptions;
 
 /**
+ *
  * @author Neil
  * @date 2018/11/14 11:26
  */

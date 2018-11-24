@@ -10,7 +10,18 @@ import info.neilqin.entity.vo.GoodsVO;
  */
 public interface IOrderService {
 
+    /**
+     * 从redis获取秒杀记录
+     * @param id
+     * @param goodsId
+     * @return
+     */
     OrderPO findSeckillOrderByUidAndGid(Long id, Long goodsId);
 
-    void seckill(UserPO user, GoodsVO goods);
+    /**
+     * 秒杀逻辑
+     * @param user
+     * @param goods
+     */
+    void seckillByBD(UserPO user, GoodsVO goods);
 }

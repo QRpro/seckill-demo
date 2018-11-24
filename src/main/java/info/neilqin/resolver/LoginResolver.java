@@ -17,6 +17,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
+ * 登录校验器
  * @author Neil
  * @date 2018/11/19 15:48
  */
@@ -37,11 +38,12 @@ public class LoginResolver implements HandlerMethodArgumentResolver{
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
         HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = nativeWebRequest.getNativeResponse(HttpServletResponse.class);
-
+        // 从param中或者cookie中取token
         String paramToken = request.getParameter(Constants.Catch.COOKIE_NAME_TOKEN);
         String cookieToken = getCookieValue(request, Constants.Catch.COOKIE_NAME_TOKEN);
         boolean isLoginUri = LOGIN_URI.equals(request.getRequestURI());
         if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
+            // 放行登录接口
             if (!isLoginUri){
                 response.sendRedirect(LOGIN_URI);
                 throw BusiException.NEED_LOGIN;

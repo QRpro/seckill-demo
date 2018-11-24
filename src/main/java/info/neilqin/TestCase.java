@@ -49,9 +49,9 @@ public class TestCase {
 		log.info("end  :{}", System.currentTimeMillis());
 	}
 
+	//生成用户
 	private static List<UserPO> createUser(int count) {
 		List<UserPO> users = new ArrayList<UserPO>(count);
-		//生成用户
 		for (int i = 0; i < count; i++) {
 			UserPO user = new UserPO();
 			long id = SnowFlake.instance.nextId();
@@ -68,8 +68,8 @@ public class TestCase {
 		log.info("create user");
 		return users;
 	}
+	//插入数据库
 	private static void insertDB(List<UserPO> users) throws Exception {
-//		//插入数据库
 		Connection conn = getConn();
 		String sql = "insert into sk_user(login_count, nickname, register_date, salt, password, id,phone)values(?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -89,8 +89,8 @@ public class TestCase {
 		conn.close();
 		System.out.println("insert to db");
 	}
+	//登录，生成token
 	private static void signInAndsaveTokenToFile(List<UserPO> users) throws Exception {
-		//登录，生成token
 		String urlString = "http://localhost:8080/user/to_login";
 		File file = new File("D:/tokens.txt");
 		if(file.exists()) {
@@ -145,4 +145,5 @@ public class TestCase {
 		Class.forName(driver);
 		return DriverManager.getConnection(url,username, password);
 	}
+
 }

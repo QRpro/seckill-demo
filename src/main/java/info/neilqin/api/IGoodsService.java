@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface IGoodsService {
     /**
+     * 获取所有商品信息
      * @return
      */
     List<GoodsVO> findAll();

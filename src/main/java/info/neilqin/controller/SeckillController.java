@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 秒杀相关Controller
  * @author Neil
  * @date 2018/11/20 17:10
  */
@@ -26,8 +27,10 @@ public class SeckillController {
 
     @Autowired
     private ISeckillService seckillService;
-
-    private RateLimiter rateLimiter =  RateLimiter.create(2);
+    /**
+     *基于令牌桶限流算法 400/1s
+    */
+    private RateLimiter rateLimiter =  RateLimiter.create(400);
 
     @PostMapping("/path/{goodsId}")
     public JSONView<String> getSeckillPath(@PathVariable("goodsId")Long goodsId, UserPO user){

@@ -1,6 +1,7 @@
 package info.neilqin.exceptions;
 
 /**
+ * 业务异常类
  * @author Neil
  * @date 2018/11/14 11:25
  */

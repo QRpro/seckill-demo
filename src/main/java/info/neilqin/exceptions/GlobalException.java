@@ -1,6 +1,7 @@
 package info.neilqin.exceptions;
 
 /**
+ * 全局异常类
  * @author Neil
  * @date 2018/11/14 11:25
  */
