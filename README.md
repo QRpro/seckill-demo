@@ -2,28 +2,28 @@
 ---
 
 ###项目环境搭建
--[x] 操作系统： Windows
--[x] IDE： IntelliJ IDEA
--[x] JDK： 1.8， Stream API 真香
--[x] NoSql：Redis
--[x] 数据库： Mysql 5.6
--[x] 依赖管理工具 : Maven
--[x] MQ : RabbitMQ
+- 操作系统： Windows
+- IDE： IntelliJ IDEA
+- JDK： 1.8， Stream API 真香
+- NoSql：Redis
+- 数据库： Mysql 5.6
+- 依赖管理工具 : Maven
+- MQ : RabbitMQ
 
 ###其他：  
--[x] Navicat Premium
--[x] Redis Desktop Manager
+- Navicat Premium
+- Redis Desktop Manager
 
 ###包含技术点：  
--[x] SpringBoot相关集成
--[x] JavaBean 配置方式
--[x] 自定义拦截器
--[x] 自定义参数解析器
--[x] 异常类设计
--[x] 基于桶算法限流策略
--[x] JMeter
--[x] 分布式ID生成算法 Twitter雪花算法
--[x] RockerMQ
+- SpringBoot相关集成
+- JavaBean 配置方式
+- 自定义拦截器
+- 自定义参数解析器
+- 异常类设计
+- 基于桶算法限流策略
+- JMeter
+- 分布式ID生成算法 Twitter雪花算法
+- RockerMQ
 ### 部署及运行
 1. 修改application.yml相关配置
 2. 启动AppStart
